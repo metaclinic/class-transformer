@@ -158,7 +158,7 @@ export class MetadataStorage {
 
     private findMetadatas<T extends { target: Function, propertyName: string }>(metadatas: T[], target: Function, propertyName: string): T[] {
         const metadataFromTarget = metadatas.filter(meta => meta.target === target && meta.propertyName === propertyName);
-        const metadataFromChildren = metadatas.filter(meta => target.prototype instanceof meta.target && meta.propertyName === propertyName);
+        const metadataFromChildren = metadatas.filter(meta => target && target.prototype instanceof meta.target && meta.propertyName === propertyName);
         return metadataFromChildren.reverse().concat(metadataFromTarget.reverse());
     }
 
